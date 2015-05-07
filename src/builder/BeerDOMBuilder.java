@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,19 +19,23 @@ import beer.Beer.Char.Filling;
 import beer.Beer.Ingredient;
 import beer.Beers;
 
-public class BeerDOMBuilder {
-	
-	public static void main(String[] args) {
-		
-		BeerDOMBuilder builder = new BeerDOMBuilder();
-		builder.parserArray();
+public class BeerDOMBuilder extends AbstractBuilder{
+	private DocumentBuilder docBuilder;
+	private List<Beer> beers;
 
+	public BeerDOMBuilder()  {
+		this.beers = new ArrayList<Beer>();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try {
+			docBuilder = factory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			System.err.println("Ошибка конфигурации парсера: " + e);
+		}
 	}
 
-	public Beers parserArray() {
-		Beers beers = new Beers();
+	public void buildBeers(String xmlFilePath) {
 		List<Ingredient> ingredients = new ArrayList<Ingredient>();
-		try {			
+		try {
 			File xmlFile = new File("data.xml");
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
 					.newInstance();
@@ -102,14 +107,12 @@ public class BeerDOMBuilder {
 					Beer beer = new Beer(name, type, al, manufacturer,
 							ingredients, c);
 					beers.add(beer);
-
 				}
 			}
-			System.out.println(beers.toString());
 		} catch (Exception e) {
 			System.out.println(e.getLocalizedMessage());
 			e.printStackTrace();
 		}
-		return beers;
+
 	}
 }

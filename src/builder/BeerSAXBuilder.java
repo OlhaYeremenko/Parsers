@@ -3,6 +3,7 @@ package builder;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.XMLReader;
@@ -26,6 +27,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -36,13 +39,27 @@ import beer.Beer.Char.Filling;
 import beer.Beer;
 import beer.Beers;
 
-public class BeerSAXBuilder {
+public class BeerSAXBuilder extends AbstractBuilder {
 
-	public static Beers beers = new Beers();
-	public static ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+	private DocumentBuilder docBuilder;
+	private List<Beer> beers;
+	private  ArrayList<Ingredient> ingredients ;
 
-	public static void main(String[] args) throws ParserConfigurationException,
-			SAXException, IOException {
+	public BeerSAXBuilder() {
+		this.ingredients= new ArrayList<Ingredient>();
+		this.beers = new ArrayList<Beer>();
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try {
+			docBuilder = factory.newDocumentBuilder();
+		} catch (ParserConfigurationException e) {
+			System.err.println("Ошибка конфигурации парсера: " + e);
+		}
+	}
+
+	public void buildBeers(String xmlFilePath) throws IOException, ParserConfigurationException, SAXException {
+	
+
+
 
 		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 		SAXParser saxParser = saxParserFactory.newSAXParser();
@@ -76,7 +93,7 @@ public class BeerSAXBuilder {
 
 			public void startElement(String uri, String localName,
 					String qName, Attributes attributes) throws SAXException {
-
+			
 				Amount = attributes.getValue("amount");
 				Material = attributes.getValue("material");
 
