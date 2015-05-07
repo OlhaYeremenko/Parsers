@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beers>
+  <beer>
+  <name>пиво1</name>
+  <type>темное</type>
+   <al>алкогольное</al>
+   <manufacturer>изготовитель</manufacturer>
+  <ingredients><ingredient amount="250">Вода</ingredient><ingredient amount="60">Хмель</ingredient><ingredient amount="100">Сахар</ingredient></ingredients>
+  <chars>
+    <numberOfTurns>5</numberOfTurns>
+    <transparency>10%</transparency>
+    <filtered> да</filtered>
+	    <nutritional> 250ккал</nutritional>
+		    <filling material="пластик">0,5л </filling >
+  </chars>
+  </beer>
+    <beer>
+  <name>пиво2</name>
+  <type>светлое</type>
+   <al>неалкогольное</al>
+   <manufacturer>изготовитель2</manufacturer>
+  <ingredients><ingredient amount="250">Вода</ingredient><ingredient amount="0">Хмель</ingredient><ingredient amount="100">Сахар</ingredient></ingredients>
+  <chars>
+    <numberOfTurns>0</numberOfTurns>
+    <transparency>10%</transparency>
+    <filtered> да</filtered>
+	    <nutritional> 210ккал</nutritional>
+		    <filling material="пластик">0,3л </filling >
+	
+  </chars>
+  </beer>
+  
+</beers>
+
+
