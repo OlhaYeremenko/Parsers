@@ -1,70 +1,29 @@
 {
-  "beers": {
+  
     "beer": [
       {
         "name": "пиво1",
         "type": "темное",
         "al": "алкогольное",
         "manufacturer": "изготовитель",
-        "ingredients": {
-          "ingredient": [
+        "ingredients": [
             {
-              "-amount": "250",
-              "#text": "Вода"
-            },
-            {
-              "-amount": "60",
-              "#text": "Хмель"
-            },
-            {
-              "-amount": "100",
-              "#text": "Сахар"
+              "amount": "250",
+              "text": "Вода"
             }
           ]
-        },
+        ,
         "chars": {
           "numberOfTurns": "5",
           "transparency": "10%",
           "filtered": " да",
           "nutritional": " 250ккал",
           "filling": {
-            "-material": "пластик",
-            "#text": "0,5л "
-          }
-        }
-      },
-      {
-        "name": "пиво2",
-        "type": "светлое",
-        "al": "неалкогольное",
-        "manufacturer": "изготовитель2",
-        "ingredients": {
-          "ingredient": [
-            {
-              "-amount": "250",
-              "#text": "Вода"
-            },
-            {
-              "-amount": "0",
-              "#text": "Хмель"
-            },
-            {
-              "-amount": "100",
-              "#text": "Сахар"
-            }
-          ]
-        },
-        "chars": {
-          "numberOfTurns": "0",
-          "transparency": "10%",
-          "filtered": " да",
-          "nutritional": " 210ккал",
-          "filling": {
-            "-material": "пластик",
-            "#text": "0,3л "
+            "material": "пластик",
+            "text": "0,5л "
           }
         }
       }
     ]
-  }
+  
 }

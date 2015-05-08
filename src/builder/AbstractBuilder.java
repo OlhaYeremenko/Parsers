@@ -10,19 +10,21 @@ import org.jdom.JDOMException;
 import org.xml.sax.SAXException;
 
 import beer.Beer;
+import beer.Beers;
 
 public abstract class AbstractBuilder {
 
 	// protected так как к нему часто обращаются из подкласса
-	  protected List<Beer> beers ; 
+	  protected 	 Beers beers; 
 	  public AbstractBuilder() {
-	    beers = new ArrayList<Beer>();
+	    beers = new Beers();
 	  }
-	  public AbstractBuilder(ArrayList<Beer> beers) {
+	  public AbstractBuilder(Beers beers) {
 	    this.beers = beers;
 	  }
-	  public List<Beer> getBeers() {
+	  public Beers getBeers() {
 	    return beers;
 	  }
+	  
 	  abstract public void buildBeers(String fileName) throws JDOMException, IOException, ParserConfigurationException, SAXException;
 }

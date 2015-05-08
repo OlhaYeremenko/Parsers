@@ -19,7 +19,7 @@
   <type>светлое</type>
    <al>неалкогольное</al>
    <manufacturer>изготовитель2</manufacturer>
-  <ingredients><ingredient amount="250">Вода</ingredient><ingredient amount="0">Хмель</ingredient><ingredient amount="100">Сахар</ingredient></ingredients>
+  <ingredients><ingredient amount="200">Вода</ingredient><ingredient amount="0">Хмель</ingredient><ingredient amount="50">Сахар</ingredient></ingredients>
   <chars>
     <numberOfTurns>0</numberOfTurns>
     <transparency>10%</transparency>

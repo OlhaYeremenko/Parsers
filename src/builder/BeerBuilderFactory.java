@@ -3,7 +3,7 @@ package builder;
 public class BeerBuilderFactory {
 
 	private enum TypeParser {
-		SAX, JDOM, DOM, JSON
+		SAX, JDOM, DOM
 	}
 
 	public AbstractBuilder createBeertBuilder(String typeParser) {

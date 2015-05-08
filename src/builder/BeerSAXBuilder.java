@@ -42,12 +42,12 @@ import beer.Beers;
 public class BeerSAXBuilder extends AbstractBuilder {
 
 	private DocumentBuilder docBuilder;
-	private List<Beer> beers;
+	private Beers beer;
 	private  ArrayList<Ingredient> ingredients ;
 
 	public BeerSAXBuilder() {
 		this.ingredients= new ArrayList<Ingredient>();
-		this.beers = new ArrayList<Beer>();
+		this.beers = new Beers();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			docBuilder = factory.newDocumentBuilder();
@@ -56,7 +56,7 @@ public class BeerSAXBuilder extends AbstractBuilder {
 		}
 	}
 
-	public void buildBeers(String xmlFilePath) throws IOException, ParserConfigurationException, SAXException {
+	public void buildBeers(String xmlFilePath) throws JDOMException, IOException, ParserConfigurationException, SAXException {
 	
 
 
@@ -146,22 +146,22 @@ public class BeerSAXBuilder extends AbstractBuilder {
 				if (bName) {
 					Name = new String(ch, start, length);
 					bName = false;
-					System.out.println(Name);
+			
 				}
 				if (bType) {
 					Type = new String(ch, start, length);
 					bType = false;
-					System.out.println(Type);
+			
 				}
 				if (bAl) {
 					Al = new String(ch, start, length);
 					bAl = false;
-					System.out.println(Al);
+				
 				}
 				if (bManufacturer) {
 					Manufacturer = new String(ch, start, length);
 					bManufacturer = false;
-					System.out.println(Manufacturer);
+				
 				}
 				if (bIngredient) {
 					Ingredient = new String(ch, start, length);
@@ -171,35 +171,34 @@ public class BeerSAXBuilder extends AbstractBuilder {
 				if (bAmount) {
 					Amount = new String(ch, start, length);
 					bAmount = false;
-					System.out.println("amout" + Amount);
 
 				}
 				if (bNumberOfTurns) {
 					NumberOfTurns = new String(ch, start, length);
 					bNumberOfTurns = false;
-					System.out.println(NumberOfTurns);
+				
 				}
 				if (bFiltered) {
 					Filtered = new String(ch, start, length);
 					bFiltered = false;
-					System.out.println(Filtered);
+				
 				}
 
 				if (bNutritional) {
 					Nutritional = new String(ch, start, length);
 					bNutritional = false;
-					System.out.println(Nutritional);
+				
 				}
 				if (bFilling) {
 					Filling = new String(ch, start, length);
 					bFilling = false;
-					System.out.println(Filling);
+				
 				}
 
 				if (bMaterial) {
 					Material = new String(ch, start, length);
 					bMaterial = false;
-					System.out.println(Material);
+					
 				}
 				Char c = new Char(NumberOfTurns, Transparency, Filtered,
 						Nutritional, new Filling(Filling, Material));
@@ -214,7 +213,6 @@ public class BeerSAXBuilder extends AbstractBuilder {
 		};
 
 		saxParser.parse("data.xml", defaultHandler);
-		System.out.println(beers.toString());
 	}
 	
 }

@@ -1,6 +1,7 @@
 package builder;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.JDOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import beer.Beer;
 import beer.Beer.Char;
@@ -19,12 +22,13 @@ import beer.Beer.Char.Filling;
 import beer.Beer.Ingredient;
 import beer.Beers;
 
-public class BeerDOMBuilder extends AbstractBuilder{
+public class BeerDOMBuilder extends AbstractBuilder {
 	private DocumentBuilder docBuilder;
-	private List<Beer> beers;
+	// private List<Beer> beers;
+	private Beers beer;
 
-	public BeerDOMBuilder()  {
-		this.beers = new ArrayList<Beer>();
+	public BeerDOMBuilder() {
+		this.beers = new Beers();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			docBuilder = factory.newDocumentBuilder();
@@ -33,10 +37,11 @@ public class BeerDOMBuilder extends AbstractBuilder{
 		}
 	}
 
-	public void buildBeers(String xmlFilePath) {
+	public void buildBeers(String xmlFilePath) throws JDOMException,
+			IOException, ParserConfigurationException, SAXException {
 		List<Ingredient> ingredients = new ArrayList<Ingredient>();
 		try {
-			File xmlFile = new File("data.xml");
+			File xmlFile = new File(xmlFilePath);
 			DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder documentBuilder = documentBuilderFactory

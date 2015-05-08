@@ -1,8 +1,9 @@
 package beer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class Beers {
+public class Beers implements Iterable<Beer> {
 
 	
 	
@@ -32,5 +33,13 @@ public class Beers {
 	@Override
 	public String toString() {
 	return "Beers " + list ;
+	}
+
+
+	@Override
+	public Iterator<Beer> iterator() {
+       
+	        Iterator<Beer> iBeer = list.iterator();
+	        return iBeer; 
 	}
 }

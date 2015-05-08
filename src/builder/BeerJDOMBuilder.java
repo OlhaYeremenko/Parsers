@@ -13,6 +13,7 @@ import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
+import org.xml.sax.SAXException;
 
 import beer.Beer;
 import beer.Beer.Char;
@@ -22,10 +23,10 @@ import beer.Beers;
 
 public class BeerJDOMBuilder extends AbstractBuilder {
 	private DocumentBuilder docBuilder;
-	private List<Beer> beers;
+	private Beers beer;
 
 	public BeerJDOMBuilder() {
-		this.beers = new ArrayList<Beer>();
+		this.beers = new Beers();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
 			docBuilder = factory.newDocumentBuilder();
@@ -34,8 +35,7 @@ public class BeerJDOMBuilder extends AbstractBuilder {
 		}
 	}
 
-	public void buildBeers(String xmlFilePath) throws JDOMException,
-			IOException {
+	public void buildBeers(String xmlFilePath) throws JDOMException, IOException, ParserConfigurationException, SAXException {
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 		SAXBuilder saxBuilder = new SAXBuilder();
 		File xmlFile = new File(xmlFilePath);
