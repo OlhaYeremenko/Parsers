@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -15,6 +16,7 @@ import org.jdom.JDOMException;
 import org.jdom.input.SAXBuilder;
 import org.xml.sax.SAXException;
 
+import factory.AbstractBuilder;
 import beer.Beer;
 import beer.Beer.Char;
 import beer.Beer.Char.Filling;
@@ -23,8 +25,6 @@ import beer.Beers;
 
 public class BeerJDOMBuilder extends AbstractBuilder {
 	private DocumentBuilder docBuilder;
-	private Beers beer;
-
 	public BeerJDOMBuilder() {
 		this.beers = new Beers();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -35,7 +35,7 @@ public class BeerJDOMBuilder extends AbstractBuilder {
 		}
 	}
 
-	public void buildBeers(String xmlFilePath) throws JDOMException, IOException, ParserConfigurationException, SAXException {
+	public void buildBeers(String xmlFilePath) throws JDOMException, IOException, ParserConfigurationException, SAXException, JAXBException  {
 		ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 		SAXBuilder saxBuilder = new SAXBuilder();
 		File xmlFile = new File(xmlFilePath);

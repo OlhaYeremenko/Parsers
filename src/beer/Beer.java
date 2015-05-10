@@ -3,17 +3,21 @@ package beer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlRootElement;
+
+
+@XmlRootElement(name = "beer")
 public class Beer {
 
 	private String name;
 	private String type;
 	private String al;
 	private String manufacturer;
-	private Ingredient ingredient = new Ingredient();
 	private List<Ingredient> ingredients;
-	private List<Char> chares;
-
-	private Char chars = new Char();
+	private Char chars;
 
 	public Beer(String name, String type, String al, String manufacturer,
 			List<Ingredient> ingredients, Char chars) {
@@ -32,7 +36,8 @@ public class Beer {
 	public Char getChars() {
 		return chars;
 	}
-
+	
+    @XmlElement(name="chars")
 	public void setChars(Char chars) {
 		this.chars = chars;
 	}
@@ -40,7 +45,8 @@ public class Beer {
 	public String getName() {
 		return name;
 	}
-
+	
+    @XmlElement(name="name")
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -48,7 +54,7 @@ public class Beer {
 	public String getType() {
 		return type;
 	}
-
+    @XmlElement(name="type")
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -56,7 +62,8 @@ public class Beer {
 	public String getAl() {
 		return al;
 	}
-
+	
+    @XmlElement(name="al")
 	public void setAl(String al) {
 		this.al = al;
 	}
@@ -64,23 +71,21 @@ public class Beer {
 	public String getManufacturer() {
 		return manufacturer;
 	}
-
+	
+    @XmlElement(name="manufacturer")
 	public void setManufacturer(String manufacturer) {
 		this.manufacturer = manufacturer;
 	}
 
-	public Ingredient getIngredient() {
-		return ingredient;
-	}
 
-	public void setIngredient(Ingredient ingredient) {
+	/*public void setIngredient(Ingredient ingredient) {
 		this.ingredient = ingredient;
-	}
+	}*/
 
 	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
-
+	@XmlElement
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
@@ -111,7 +116,7 @@ public class Beer {
 		public String getIngredient() {
 			return ingredient;
 		}
-
+		@XmlElement (name="ingredient")
 		public void setIngredient(String ingredient) {
 			this.ingredient = ingredient;
 		}
@@ -119,7 +124,7 @@ public class Beer {
 		public String getAmount() {
 			return amount;
 		}
-
+		@XmlAttribute(name ="amount")
 		public void setAmount(String amount) {
 			this.amount = amount;
 		}
@@ -128,8 +133,8 @@ public class Beer {
 			return  getIngredient()
 					+ " amount: " + getAmount() ;
 		}
-	}                                                                                                
-
+	}        
+	
 	 public static class Char {
 		private String numberOfTurns;
 		private String transparency;
@@ -152,7 +157,8 @@ public class Beer {
 		public String getNumberOfTurns() {
 			return numberOfTurns;
 		}
-
+		
+		@XmlElement(name="numberOfTurns") 
 		public void setNumberOfTurns(String numberOfTurns) {
 			this.numberOfTurns = numberOfTurns;
 		}
@@ -160,7 +166,8 @@ public class Beer {
 		public String getTransparency() {
 			return transparency;
 		}
-
+		
+		@XmlElement(name="transparency")  
 		public void setTransparency(String transparency) {
 			this.transparency = transparency;
 		}
@@ -168,7 +175,8 @@ public class Beer {
 		public String getFiltered() {
 			return filtered;
 		}
-
+		
+		@XmlElement (name="filtered")  
 		public void setFiltered(String filtered) {
 			this.filtered = filtered;
 		}
@@ -176,7 +184,8 @@ public class Beer {
 		public String getNutritional() {
 			return nutritional;
 		}
-
+		
+		@XmlElement (name="nutritional")  
 		public void setNutritional(String nutritional) {
 			this.nutritional = nutritional;
 		}
@@ -184,7 +193,7 @@ public class Beer {
 		public Filling getFill() {
 			return fill;
 		}
-
+		@XmlElement (name="filling")  
 		public void setFill(Filling fill) {
 			this.fill = fill;
 		}
@@ -197,6 +206,7 @@ public class Beer {
 		public static class Filling {
 
 			private String material;
+			
 			private String volume;
 
 			public Filling() {
@@ -210,7 +220,8 @@ public class Beer {
 			public String getMaterial() {
 				return material;
 			}
-
+			
+			@XmlAttribute(name="material")
 			public void setMaterial(String material) {
 				this.material = material;
 			}
@@ -218,7 +229,8 @@ public class Beer {
 			public String getVolume() {
 				return volume;
 			}
-
+			
+			@XmlElement(name="filling")
 			public void setVolume(String volume) {
 				this.volume = volume;
 			}

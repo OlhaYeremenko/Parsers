@@ -3,6 +3,10 @@ package beer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "beers")
 public class Beers implements Iterable<Beer> {
 
 	
@@ -13,7 +17,7 @@ public class Beers implements Iterable<Beer> {
 		return list;
 	}
 
-
+	@XmlElement(name = "beer")
 	public void setList(ArrayList<Beer> list) {
 		this.list = list;
 	}

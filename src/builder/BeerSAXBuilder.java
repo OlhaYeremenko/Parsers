@@ -27,6 +27,9 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import factory.AbstractBuilder;
+
+import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -42,11 +45,11 @@ import beer.Beers;
 public class BeerSAXBuilder extends AbstractBuilder {
 
 	private DocumentBuilder docBuilder;
-	private Beers beer;
-	private  ArrayList<Ingredient> ingredients ;
+
+	Beer b;
+	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
 
 	public BeerSAXBuilder() {
-		this.ingredients= new ArrayList<Ingredient>();
 		this.beers = new Beers();
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
@@ -56,15 +59,15 @@ public class BeerSAXBuilder extends AbstractBuilder {
 		}
 	}
 
-	public void buildBeers(String xmlFilePath) throws JDOMException, IOException, ParserConfigurationException, SAXException {
-	
-
-
+	public void buildBeers(String xmlFilePath) throws JDOMException,
+			IOException, ParserConfigurationException, SAXException,
+			JAXBException {
 
 		SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
 		SAXParser saxParser = saxParserFactory.newSAXParser();
 		DefaultHandler defaultHandler = new DefaultHandler() {
 
+			boolean bBeer = false;
 			boolean bName = false;
 			boolean bType = false;
 			boolean bAl = false;
@@ -93,7 +96,7 @@ public class BeerSAXBuilder extends AbstractBuilder {
 
 			public void startElement(String uri, String localName,
 					String qName, Attributes attributes) throws SAXException {
-			
+
 				Amount = attributes.getValue("amount");
 				Material = attributes.getValue("material");
 
@@ -138,30 +141,55 @@ public class BeerSAXBuilder extends AbstractBuilder {
 
 			public void endElement(String uri, String localName, String qName)
 					throws SAXException {
-				// System.out.println("End element: " + qName);
+				Filling f = null;
+				Char c = null;
+				//System.out.println(Filling +" , "+Material+" , "+NumberOfTurns+" , "+Transparency+" , "+Filtered+" , "+Nutritional+" , "+Name+" , "+Type+" , "+Al+" , "+Manufacturer);
+				//System.out.println(".............. ");
+				if (Filling != null && Material != null
+						&& NumberOfTurns != null 
+						&& Filtered != null && Nutritional != null
+						&& Name != null && Type != null && Al != null
+						&& Manufacturer != null) {
+					
+					f = new Filling(Filling, Material);
+
+					c = new Char(NumberOfTurns, Transparency, Filtered,
+							Nutritional, f);
+
+					b = new Beer(Name, Type, Al, Manufacturer, ingredients, c);
+					beers.add(b);
+				}
+
 			}
 
 			public void characters(char ch[], int start, int length)
 					throws SAXException {
+				if (bBeer) {
+					b = new Beer();
+					beers.add(b);
+					bBeer = false;
+				}
+
+
 				if (bName) {
 					Name = new String(ch, start, length);
 					bName = false;
-			
+
 				}
 				if (bType) {
 					Type = new String(ch, start, length);
 					bType = false;
-			
+
 				}
 				if (bAl) {
 					Al = new String(ch, start, length);
 					bAl = false;
-				
+
 				}
 				if (bManufacturer) {
 					Manufacturer = new String(ch, start, length);
 					bManufacturer = false;
-				
+
 				}
 				if (bIngredient) {
 					Ingredient = new String(ch, start, length);
@@ -176,43 +204,49 @@ public class BeerSAXBuilder extends AbstractBuilder {
 				if (bNumberOfTurns) {
 					NumberOfTurns = new String(ch, start, length);
 					bNumberOfTurns = false;
-				
+
 				}
+				if (bTransparency) {
+					Transparency = new String(ch, start, length);
+					bTransparency = false;
+
+				}
+				
 				if (bFiltered) {
 					Filtered = new String(ch, start, length);
 					bFiltered = false;
-				
+
 				}
 
 				if (bNutritional) {
 					Nutritional = new String(ch, start, length);
 					bNutritional = false;
-				
+
 				}
 				if (bFilling) {
 					Filling = new String(ch, start, length);
 					bFilling = false;
-				
+
 				}
 
 				if (bMaterial) {
 					Material = new String(ch, start, length);
 					bMaterial = false;
-					
+
 				}
-				Char c = new Char(NumberOfTurns, Transparency, Filtered,
-						Nutritional, new Filling(Filling, Material));
-				
-			Beer beer =new Beer(Name, Type, Al, Manufacturer,
-					ingredients, c);
-			if (c != null) {
-				beers.add(beer);
-			}
+
+				/*
+				 * Char c = new Char(NumberOfTurns, Transparency, Filtered,
+				 * Nutritional, new Filling(Filling, Material));
+				 * 
+				 * b=new Beer(Name, Type, Al, Manufacturer, ingredients, c);
+				 */
+
 			}
 
 		};
 
 		saxParser.parse("data.xml", defaultHandler);
 	}
-	
+
 }

@@ -1,9 +1,14 @@
-package builder;
+package factory;
+
+import builder.BeerDOMBuilder;
+import builder.BeerJAXBBuilder;
+import builder.BeerJDOMBuilder;
+import builder.BeerSAXBuilder;
 
 public class BeerBuilderFactory {
 
 	private enum TypeParser {
-		SAX, JDOM, DOM
+		SAX, JDOM, DOM,JAXB
 	}
 
 	public AbstractBuilder createBeertBuilder(String typeParser) {
@@ -15,6 +20,8 @@ public class BeerBuilderFactory {
 			return new BeerJDOMBuilder();
 		case SAX:
 			return new BeerSAXBuilder();
+		case JAXB:
+			return new BeerJAXBBuilder();
 		default:
 			throw new EnumConstantNotPresentException(type.getDeclaringClass(),
 					type.name());
