@@ -12,7 +12,7 @@ public class Demo {
 
 	public static void main(String[] args) throws JDOMException, IOException, ParserConfigurationException, SAXException, JAXBException {
 		BeerBuilderFactory bFactory = new BeerBuilderFactory();
-		AbstractBuilder builder = bFactory.createBeertBuilder("SAX");
+		AbstractBuilder builder = bFactory.createBeertBuilder("DOM");
 		builder.buildBeers("data.xml");
 		System.out.println(builder.getBeers());
 		
